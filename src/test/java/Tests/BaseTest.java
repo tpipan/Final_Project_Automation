@@ -4,9 +4,7 @@ import Utils.BrowserUtils;
 import Utils.ConfigUtils;
 import Utils.ConstantUtils;
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
 
 public class BaseTest {
 
@@ -28,11 +26,11 @@ public class BaseTest {
         driver = BrowserUtils.getBrowser(browser);
     }
 
-    @AfterMethod(alwaysRun = true)
-    public void cleanUp() {
-        if (driver != null)
-            driver.quit();
-    }
+//    @AfterMethod(alwaysRun = true)
+//    public void cleanUp() {
+//        if (driver != null)
+//            driver.quit();
+//    }
 
 
 }
