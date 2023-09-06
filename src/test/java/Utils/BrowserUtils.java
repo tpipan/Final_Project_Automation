@@ -1,14 +1,19 @@
 package Utils;
+
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
-import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
+import java.time.temporal.ChronoUnit;
 
 public class BrowserUtils {
     static WebDriver driver;
+    static WebDriverWait wait;
 
     public static WebDriver getBrowser(String browser) {
         switch (browser.toLowerCase()) {
@@ -16,8 +21,6 @@ public class BrowserUtils {
                 WebDriverManager.chromedriver().setup();
                 ChromeOptions chromeOptions = getChromeOptions();
                 driver = new ChromeDriver(chromeOptions);
-                // replaced by chrome options version
-//                driver.manage().window().maximize();
                 return driver;
             }
             case ("firefox"): {
@@ -40,17 +43,15 @@ public class BrowserUtils {
         }
     }
 
-    private static EdgeOptions getEdgeOptions() {
-        EdgeOptions edgeOptions = new EdgeOptions();
-        edgeOptions.setCapability("--start-maximized", true);
-        return edgeOptions;
-    }
 
     private static ChromeOptions getChromeOptions() {
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("start-maximized");
         chromeOptions.addArguments("incognito");
-//        chromeOptions.addArguments("--headless");
         return chromeOptions;
+    }
+
+    static void WaitFor(int seconds) {
+        wait = new WebDriverWait(driver, Duration.of(seconds, ChronoUnit.SECONDS));
     }
 }

@@ -10,12 +10,11 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class CarouselTest extends BaseTest {
-
     @Test
     public void carouselTest() throws InterruptedException {
-        setUpDriver("");
-        driver.get(baseUrl);
+
         MainPage mainPage = new MainPage(driver);
+        mainPage.goToMainPage(driver);
 
         List<WebElement> carouselSlides = driver.findElements(By.className("d-none d-md-block lazy"));
         TimeUnit.SECONDS.sleep(1);

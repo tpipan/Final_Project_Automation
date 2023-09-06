@@ -5,6 +5,7 @@ import Utils.ConfigUtils;
 import Utils.ConstantUtils;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 
 public class BaseTest {
 
@@ -24,6 +25,13 @@ public class BaseTest {
             browser = ConfigUtils.getGenericElement(ConstantUtils.CONFIG_FILE, "browser");
         System.out.println("Set up webdriver for browser:" + browser);
         driver = BrowserUtils.getBrowser(browser);
+    }
+
+    @BeforeMethod
+    public void startBrowser() {
+        String browserName = ConfigUtils.getGenericElement(ConstantUtils.CONFIG_FILE, "browser");
+        setUpDriver(browserName);
+        driver.get(baseUrl);
     }
 
 //    @AfterMethod(alwaysRun = true)
